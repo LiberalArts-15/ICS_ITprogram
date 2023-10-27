@@ -1,0 +1,34 @@
+{% extends "ideaboard_base/base_header.html" %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+ICS | {{ profile_user.username }}
+{% endblock title %}
+
+
+{% block board %}
+<main class="profile-form">
+  <form method="post" enctype="multipart/form-data" autocomplete="off">
+    {% csrf_token %}
+    <div class="profile">
+      <div class="profile-pic" style="background-image: url('{{ user.profile_pic.url }}')"></div>
+      <div class="file">
+        {{ form.profile_pic }}
+      </div>
+    </div>
+    <div class="username">
+      {{ form.username|add_class:"ics-input"|attr:"placeholder:username" }}
+    </div>
+    <div class="content">
+      {{ form.intro|add_class:"ics-input"|attr:"placeholder:ご自分を紹介してください！" }}
+    </div>
+    <div class="profile-button">
+      <a class="profile-cancle" href="{% url 'profile' user.id %}">キャンセル</a>
+      <button class="profile-save" type="submit">セーブ</button>
+    </div>
+  </form>
+</main>
+{% endblock board %}

@@ -1,0 +1,14 @@
+{% extends "ideaboard_base/base_header.html" %}
+
+{% block title %}
+ICS | {{ post.title }}
+{% endblock title %}
+
+{% block board %}
+  <form class="post-confirm-delete" method="post">
+    {% csrf_token %}
+    <div class="content-confirm">本当に消去しますか？</div>
+    <button class="delete-button" type="submit">消去</button>
+    <a class="delete-cancle-button" href="{% url 'view_detail' post.id %}">キャンセル</a>
+  </form>
+{% endblock board %}

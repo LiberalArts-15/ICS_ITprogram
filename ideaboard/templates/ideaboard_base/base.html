@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="icon" href={% static 'ideaboard/images/travel_icon.png'%}>
+    <link rel="stylesheet" href={% static 'ideaboard/css/style.css' %}>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Murecho:wght@400;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+  {% block header %}{% endblock header %}
+  <div class="container-all">
+  {% block board %}{% endblock board %}
+  {% block idea-ranking-now%}{% endblock idea-ranking-now%}
+  {% block now-hot%}{% endblock now-hot%}
+  {% block new-comment%}{% endblock new-comment%}
+  </div>
+  {% block footer %}{% endblock footer %}
+  </body>
+</html>

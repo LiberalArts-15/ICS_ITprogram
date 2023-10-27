@@ -1,0 +1,122 @@
+{% extends "ideaboard_base/base_header.html" %}
+
+{% load static %}
+
+{% block title %}ICS | Main{% endblock title %}
+
+{% block board %}
+  <div class="board-icon">
+    <img src={% static 'ideaboard/images/list_icon.png'%}>
+    <img src={% static 'ideaboard/images/thumbnail_icon.png'%}>
+  </div>
+  <form>
+    <div class="category">
+      <select id="category-select" name="category-select">
+        <option value="all">全体</option>
+        <option value="title-contents">タイトル・内容</option>
+        <option value="writer">投稿者</option>
+      </select>
+      <input id="search" name="search" type="text" required autocomplete="on">
+      <button id="search-button">
+        検索
+      </button>
+      <button class="primary-button" id="post-button">
+        <a href="/posts/new">
+          投稿
+        </a>
+      </button>
+    </div>
+  </form>
+  <div class="main-container">
+<!--後でbuttonはdivから a href に変更-->
+    <div class="main-left">
+      <table class="board" border="1">
+        <thead>
+          <tr>
+            <td>No.</td>
+            <td>カテゴリー</td>
+            <td>タイトル</td>
+            <td>投稿者</td>
+            <td>Date</td>
+            <td>ポイント</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for post in posts %}
+            <tr>
+              <td class="postlist_id">{{ post.id }}</td>
+              <td class="postlist_category">
+              {% if post.category == 'all' %}
+                自由
+              {% elif post.category == 'minutes' %}
+                会議録
+              {% elif post.category == 'notice' %}
+                お知らせ
+              {% endif %}
+              </td>
+              <td class="postlist_title">
+                <a href="{% url 'view_detail' post.id %}">
+                {{ post.title }}
+                </a>
+              </td>
+              <td class="postlist_author">{{ post.author.username }}</td>
+              <td class="postlist_date">{{ post.dt_created|date:"Y-m-d" }}</td>
+              <td class="postlist_point">N</td>
+            </tr>
+          {% empty %}
+          <p class="empty">まだ投稿がありません。</p>
+          {% endfor %}
+        </tbody>
+      </table>
+{% endblock board %}
+
+{% block idea-ranking-now%}
+</div>
+<div class="main-center">
+  <div class="idea-ranking-now">
+    <div class="idea-ranking-now-title">
+      アイデアランキング
+    </div>
+    <div>
+<ol>
+  <li>オーストラリアでのアクティビティ</li>
+  <li>別府で紅葉と温泉を満喫!!!</li>
+  <li>大阪のUSJでお子様と思い出を</li>
+</ol>
+{% endblock idea-ranking-now%}
+
+{% block now-hot%}
+</div>
+</div>
+</div>
+<div class="main-right">
+<div class="now-hot">
+  <div class="now-hot-title">
+    今話題のキーワード
+  </div>
+  <div>
+  <span>秋</span>
+  <span>福岡</span>
+  <span>海外</span>
+{% endblock now-hot%}
+
+{% block new-comment%}
+</div>
+</div>
+  <div class="new-comment">
+    <div class="new-comment-title">
+      最新コメント
+    </div>
+    <div>
+  <p>素敵なテーマですね</p>
+  <p>ここはコストを考えたほうがいいかも...</p>
+  <p>(スタンプ11を投稿しました)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock new-comment%}
+
