@@ -1,0 +1,88 @@
+{% extends "ideaboard_base/base_header.html" %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+ICS | {{ post.title }}
+{% endblock title %}
+
+{% block board %}
+  <div class="main-read">
+    <div class="read-title">
+      {{ post.title }}
+    </div>
+    <div class="read-inform">
+        <div class="author-pic" style="background-image: url('{{ post.author.profile_pic.url }}')";></div>
+      <span id="read-author">{{ post.author.username}}</span>
+      <span id="read-category">{{ post.get_category_display }}</span>
+      <span id="read-date">{{ post.dt_created|date:"Y-m-d H:i:s" }}</span>
+      <span id="read-point">ポイント</span>
+      <span id="read-num-of-comment">コメント数</span>
+    </div>
+    <div class="read-body">
+      <div class="text-content">
+        {{ post.content|linebreaksbr }}
+      </div>
+      {% if post.image1 %}
+      <img class="thumb" src="{{ post.image1.url }}">
+      {% endif %}
+      {% if post.image2 %}
+      <img class="thumb" src="{{ post.image2.url }}">
+      {% endif %}
+      {% if post.image3 %}
+      <img class="thumb" src="{{ post.image3.url }}">
+      {% endif %}
+    </div>
+    <button id="likeit" title="「いいね！」ポイントを与えます">
+        <img src={% static 'ideaboard/images/like_icon.png' %}>
+    </button>
+    <div class="comment-read">
+      <div class="comment-list">
+        コメント一覧
+        <div>
+          <ul>
+            <li class="comment-author">user1</li>
+            <li class="comment-content">素敵なテーマですねー</li>
+            <li class="comment-author">user2</li>
+            <li class="comment-content">ここはコストを考えたほうがいいかも...<br>
+            でもぜひ次の定期会議で話してみたいです！</li>
+            <li class="comment-author">user3</li>
+            <li class="comment-content"><img src={% static 'ideaboard/images/sunglass_icon.png' %}></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <textarea id="comment-post" name="comment-post" placeholder="コメントを入力してください"></textarea>
+    <div class="comment-button">
+      <button id="stamp-post-button">
+        スタンプ
+      </button>
+      <button id="comment-post-button">
+        コメント投稿
+      </button>
+    </div>
+    <div class="view-footer">
+      <div class="view-modifydelete" >
+        <a class="goto" id="goto-list" href="{% url 'index' %}" >
+          <span>戻る</span>
+        </a>
+        <a class="goto" id="goto-forward" href="#">
+          <span>前へ</span>
+        </a>
+        <a class="goto" id="goto-next" href="#">
+          <span>次へ</span>
+        </a>
+        {% if post.author == user %}
+        <a class="goto" id="modification-post" href="{% url 'post-update' post.id%}">
+          <span>修正</span>
+        </a>
+        <a class="goto" id="delete-post" href="{% url 'post-delete' post.id%}">
+          <span>消去</span>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock board %}

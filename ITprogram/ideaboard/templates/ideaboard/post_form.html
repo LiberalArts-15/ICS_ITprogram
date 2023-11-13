@@ -1,0 +1,63 @@
+{% extends "ideaboard_base/base_header.html" %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+ICS | 
+  {% if post%}
+    {{ post.title }}
+  {% endif %}
+{% endblock title %}
+
+{% block board %}
+    <form class="post-board" method="post" action="{% if post %}{% url 'post-update' post.id %}{% else %}{% url 'post-create' %}{% endif %}" autocomplete="off" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="post">
+        <div class="title">
+          {{form.category|attr:"id:post-category"}}
+          {{form.title|attr:"id:post-title"|attr:"placeholder:タイトルを入力してください"}}
+        </div>
+        <div class="setting">
+          <select id="font-select" name="font-select">
+            <option value="Arial">Arial</option>
+            <option value="MS Gothic">MS Gothic</option>
+          </select>
+          <div class="file">
+            <div class="file-content">
+              <div>
+                {{ form.image1 }}
+              </div>
+            </div>
+            <div class="file-content">
+              <div>
+                {{ form.image2 }}
+              </div>
+            </div>
+            <div class="file-content">
+              <div>
+                {{ form.image3 }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          {{form.content|attr:"id:post-body"|attr:"placeholder:本文を入力してください"}}
+        </div>
+        <div class="keyword">
+          {{form.keyword|attr:"id:post-keyword"|attr:"placeholder:キーワードを入力してください"}}
+        </div>
+        <div class="post-or-cancle">
+          <div class="cancle">
+            <a href="{% if post %}{% url 'view_detail' post.id %}{% else %}{% url 'index' %}{% endif %}">
+              戻る
+            </a>
+          </div>
+          <button class="primary-button" id="goto-post" type="submit">
+            投稿
+          </button>
+        </div>
+      </div>
+    </form>
+{% endblock board %}

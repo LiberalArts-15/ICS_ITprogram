@@ -1,0 +1,30 @@
+{% extends "ideaboard_base/base.html" %}
+
+{% load static %}
+
+{% block header %}
+<header class="site-header">
+    <nav class="navigation">
+      <a href="{% url 'index' %}">
+        <img class="CI" src={% static 'ideaboard/images/CI_icon.PNG' %}>
+      </a>
+      <ul class="main-menu">
+        <li><a class="menu-button" href="/idea-archive">アイデアアーカイブ</a></li>
+        <li><a class="menu-button" href="/all-time-ranking">歴代ランキング</a></li>
+        <li><a class="user-info" href="{% url 'profile' user.id %}">マイページ</a></li>
+        <li><a href="{% url 'account_logout'%}">ログアウト</a></li>
+        <img src={% static 'ideaboard/images/bell_icon.png'%}>
+        <img src={% static 'ideaboard/images/bulb_icon.png'%}>
+      </ul>
+    </nav>
+  </header>
+{% endblock header %}
+
+{% block footer %}
+<footer class="site-footer">
+  <div>
+    Idea Collaboration System<br>
+    made by.yoon
+  </div>
+</footer>
+{% endblock footer %}

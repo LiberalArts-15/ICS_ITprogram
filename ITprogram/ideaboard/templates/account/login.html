@@ -1,0 +1,43 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ICS | LOGIN</title>
+    <link rel="icon" href="../../static/ideaboard/images/travel_icon.png">
+    <link rel="stylesheet" href="../../static/ideaboard/css/style_account.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Murecho:wght@400;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <form action="{% url 'account_login' %}" method="post">
+      {% csrf_token %}
+      <div class="login-form">
+        <div id="login-main">
+          <h2>Login</h2>
+        </div>
+        <div>
+          {{ form.login|attr:"id:login-id"|attr:"placeholder:E-mailを入力してください" }}
+        </div>
+        <div>
+          {{ form.password|attr:"id:login-pw"|attr:"placeholder:パスワードを入力してください" }}
+        </div>
+        <div>
+          <button id="login-button" type="submit">
+              Login
+          </button>
+        </div>
+        <div class="signup_here">
+          <a id="signup_here" href="{% url 'account_signup' %}">
+            Signupはこちら
+          </a>
+          <a id="signup_here" href="{% url 'account_reset_password' %}">
+            パスワードをお忘れですか？
+          </a>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

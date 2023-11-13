@@ -1,0 +1,36 @@
+{% extends "ideaboard_base/base_header.html" %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+ICS | {{ profile_user.username }}
+{% endblock title %}
+
+
+{% block board %}
+<div class="profile-body">
+  <div class="profile-header">
+    <div class="profile-content">
+      <div class="profile-pic"
+        style="background-image: url('{{ profile_user.profile_pic.url }}')">
+      </div>
+      <div class="userinfo">
+        <h1 class="username">{{ profile_user.username }}</h1>
+        <a class="edit" href="{% url 'profile-update' %}">
+          <img class="icon-small" src="{% static 'ideaboard/images/pen_icon.png' %}" alt="Pen Icon">
+          プロフィール修正
+        </a>
+        <div>
+          <p class="userintro">{{ profile_user.intro }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="badge-list">
+    <p>[利用可能なバッジリスト]</p>
+    <img src={% static 'ideaboard/images/emoji_list_1.PNG'%}>
+  </div>
+</div>
+{% endblock board %}
